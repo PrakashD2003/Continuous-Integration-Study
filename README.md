@@ -1,6 +1,6 @@
 # Continuous-Integration-Study
 
-Here’s your content converted into a **well-formatted `README.md`** for a GitHub repository on **Continuous Integration (CI)** and **GitHub Actions**:
+
 
 ---
 
@@ -204,9 +204,3 @@ CI and GitHub Actions help:
 
 ---
 
-🛠️ *Happy Building with CI/CD!*
-```
-
----
-
-Let me know if you want this saved as a file (`README.md`) or want a version with badges, links, or GitHub profile styling!
