@@ -1,206 +1,162 @@
-# Continuous-Integration-Study
+---
 
+# Continuous Integration Study
 
+A simple project demonstrating continuous integration using GitHub Actions and a Streamlit-based calculator app. The repository explores the fundamentals of CI, automated testing with pytest, and GitHub Actions workflows.
 
 ---
 
-```markdown
-# 📦 Continuous Integration Study Guide
+## 🚀 Quick Overview
 
-Continuous Integration (CI) is a software development practice in which developers frequently merge their code into a shared repository. Each integration is verified by automated builds and tests, allowing teams to detect errors quickly and deliver high-quality software faster.
+* **Goal**: Learn and experiment with continuous integration by creating a small Python project with tests and setting up a CI pipeline via GitHub Actions.
+* **Pipeline / Workflow Steps**:
 
----
+  * Write a [Streamlit app](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/app.py) that calculates the square, cube and fifth power of a user-provided integer.
+  * Define corresponding pure Python functions (`square`, `cube`, `fifth_power`) and write [pytest tests](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/pytest_test.py) to validate them.
+  * Configure a [GitHub Actions workflow](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/.github/workflows/ci.yaml) to run on push or pull requests to the `main` branch and execute the tests.
+* **Tech Stack**: Python, Streamlit, pytest, GitHub Actions.
+* **Highlights**:
 
-## 🚀 What is Continuous Integration?
-
-Continuous Integration (CI) involves:
-- Regular code integration by developers into a shared repository.
-- Automatic builds and test execution on each code change.
-- Early detection and resolution of issues.
-
-### 🔑 Key Aspects
-- **Automated Builds & Tests**  
-  CI tools (e.g., GitHub Actions, Jenkins) automatically:
-  - Compile the code.
-  - Run unit, integration, and end-to-end tests.
-
-- **Frequent Integrations**  
-  Prevents "integration hell" by catching conflicts early.
-
-- **Code Quality Assurance**  
-  Uses linters, test frameworks, and static analysis tools.
-
-- **Immediate Feedback**  
-  Developers are instantly notified of failures, enabling quick fixes.
+  * Minimal CI pipeline using YAML workflow to install dependencies and run tests.
+  * Streamlit front-end for interactivity.
+  * Basic pytest tests for mathematical functions.
 
 ---
 
-## 🎯 Why Do We Need CI?
+## 📂 Repository Structure
 
-### 1. 🐞 Early Detection of Issues
-- Detects bugs immediately after code is pushed.
-- Quicker debugging and isolation of problems.
-
-### 2. 👥 Improved Collaboration
-- Shared codebase ensures everyone works with a tested version.
-- Reduces merge conflicts via frequent commits.
-
-### 3. ✅ Enhanced Software Quality
-- Maintains consistency across environments.
-- Automated tests uphold quality standards.
-
-### 4. 🛠️ Streamlined Workflow
-- Automates builds/tests to save developer time.
-- Enables faster and more frequent releases.
+| Path                                                                                                                            | Description                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [`.github/workflows/ci.yaml`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/.github/workflows/ci.yaml) | GitHub Actions workflow that triggers on pushes and pull requests to `main`, sets up Python 3.9, installs dependencies and runs `pytest`. |
+| [`app.py`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/app.py)                                       | Streamlit application where users input an integer and the app displays its square, cube and fifth power.                                 |
+| [`pytest_test.py`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/pytest_test.py)                       | Contains simple functions (`square`, `cube`, `fifth_power`) and pytest tests that assert correct results and handle invalid input.        |
+| [`requirements.txt`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/requirements.txt)                   | Lists Python dependencies (`streamlit`, `pytest`).                                                                                        |
+| [`.gitignore`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/.gitignore)                               | Standard Python `.gitignore` ignoring compiled files, virtual environments, caches and CI artifacts.                                      |
+| [`LICENSE`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/LICENSE)                                     | MIT license for the project.                                                                                                              |
 
 ---
 
-## 🔁 Typical CI Workflow
+## ⚙️ How It Works
 
-1. Developer pushes code to the repository.
-2. CI system detects the push.
-3. Code is automatically built and tested.
-4. Test results are reported.
-5. Developer fixes any issues.
-6. Successful builds proceed to deployment or CD.
+1. **Streamlit Calculator** – The [`app.py`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/app.py) file uses Streamlit to create a web UI with a number input widget. It calculates the square, cube and fifth power of the number at runtime.
 
----
+2. **Test Functions** – [`pytest_test.py`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/pytest_test.py) defines pure functions (`square`, `cube`, `fifth_power`) and includes pytest test cases to verify correctness and invalid input handling.
 
-## 🧪 CI Testing Types
-
-| Test Type              | Purpose                                          | Example                             |
-|------------------------|--------------------------------------------------|-------------------------------------|
-| Unit Tests             | Test functions/classes in isolation              | `add(a, b)` returns correct result |
-| Integration Tests      | Check component interaction (e.g., DB + API)     | DB query returns correct data       |
-| End-to-End (E2E) Tests | Simulate user workflows                          | Login and place order flow          |
-| Static Analysis        | Analyze code for syntax/style issues             | Lint with `flake8`, format with `black` |
-| Security Tests         | Detect vulnerabilities                          | Scan with `bandit`, `snyk`          |
-| Performance Tests      | Load/stress testing                              | API handles 1000 requests/sec       |
-| Smoke Tests            | Basic stability checks                           | Server responds with 200 OK         |
-| Regression Tests       | Ensure existing features still work              | Re-run all tests after fix          |
-| Cross-Browser Tests    | Check compatibility across browsers              | Test on Chrome, Firefox, Safari     |
+3. **CI Workflow** – The [`.github/workflows/ci.yaml`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/.github/workflows/ci.yaml) file defines a GitHub Actions pipeline that runs on push/pull requests to `main`. It checks out the repo, sets up Python 3.9, installs dependencies, and runs pytest.
 
 ---
 
-## 🧰 What is GitHub Actions?
+## ▶️ Running the Project
 
-GitHub Actions is a CI/CD tool built into GitHub. It uses YAML-based workflow files to define automation steps.
+### 1. Clone Repo
 
-### 📜 Key Features:
-- **Event-driven**: Trigger on push, PR, issue, or schedule.
-- **YAML workflows**: Define jobs and steps in `.github/workflows/`.
-- **Reusable Actions**: Use pre-built actions from the GitHub Marketplace.
-- **Hosted Runners**: Linux, macOS, Windows available.
-
----
-
-## ⚙️ Sample GitHub Actions CI Workflow
-
-```yaml
-# .github/workflows/ci.yml
-name: CI
-
-on: [push, pull_request]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run Tests
-        run: pytest
+```bash
+git clone https://github.com/PrakashD2003/Continuous-Integration-Study.git
+cd Continuous-Integration-Study
 ```
 
-### 🔍 How It Works:
-- Triggered on push/PR.
-- Runs a `build` job on Ubuntu.
-- Installs Python, dependencies, and runs `pytest`.
+### 2. Install Dependencies
 
----
-
-## ✅ Benefits of GitHub Actions
-
-| Feature               | Benefits                                           |
-|-----------------------|----------------------------------------------------|
-| Built into GitHub     | No extra tools/platforms required                  |
-| Fast Feedback         | Catch issues immediately on code changes           |
-| Custom Workflows      | Tailor CI/CD pipelines to your project             |
-| Scalable              | Supports self-hosted and cloud runners             |
-| Marketplace Actions   | Use pre-made actions to save time                  |
-
----
-
-## 🧠 Visual Overview of GitHub Actions
-
-```text
-+----------------------------+
-|   GitHub Repository        |
-|  (.github/workflows/*.yml)|
-+-------------+--------------+
-              |
-      Trigger (push, PR)
-              |
-   +----------v----------+
-   |  GitHub Actions      |
-   |  Workflow Engine     |
-   +----------+-----------+
-              |
-     +--------+---------+
-     | Self/Hosted Runners |
-     +--------------------+
-              |
-            Steps
-   (checkout, install, test)
+```bash
+pip install -r requirements.txt
 ```
 
----
+### 3. Run the Streamlit App
 
-## 🧪 What is `pytest` in GitHub Actions?
-
-- `pytest` is a Python testing framework.
-- Automatically discovers and runs test files:
-  - Files starting with `test_` or ending with `_test.py`.
-- Supports:
-  - Unit Tests
-  - Integration Tests
-  - Fixtures for test setup
-
-```yaml
-- name: Run Tests
-  run: pytest
+```bash
+streamlit run app.py
 ```
 
----
+This launches a local web interface where you can input a number and see its square, cube, and fifth power calculated live.
 
-## 📋 Summary
+### 4. Run Tests Locally
 
-CI and GitHub Actions help:
-- Maintain high code quality through frequent integration.
-- Automate testing, building, and deployment.
-- Collaborate better as a team.
-- Reduce time spent on manual tasks.
-- Ship features and fixes faster!
+```bash
+pytest
+```
 
----
+### 5. CI Pipeline
 
-## 🧠 Learn More
-
-- [GitHub Actions Docs](https://docs.github.com/en/actions)
-- [pytest Documentation](https://docs.pytest.org/)
-- [Jenkins](https://www.jenkins.io/)
-- [CircleCI](https://circleci.com/)
-- [Travis CI](https://travis-ci.com/)
+When you push changes to `main` or open a pull request, GitHub Actions automatically runs the workflow in [`.github/workflows/ci.yaml`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/.github/workflows/ci.yaml). It installs dependencies and runs the test suite.
 
 ---
+
+## 📊 Key Learnings
+
+* **Continuous Integration basics**: Automating tests with GitHub Actions.
+* **Streamlit fundamentals**: Simple interactive web app.
+* **Testing with pytest**: Unit tests, assertions, exception handling.
+* **Workflow configuration**: YAML setup for GitHub Actions.
+
+---
+
+## 🔬 Detailed Breakdown (Optional)
+
+### GitHub Actions Workflow
+
+* Defined in [`.github/workflows/ci.yaml`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/.github/workflows/ci.yaml).
+* Job: `build` → Runs on `ubuntu-latest`.
+* Steps: checkout → setup Python 3.9 → install dependencies → run pytest.
+* Triggers: push and pull requests to `main`.
+
+### Streamlit App
+
+* Implemented in [`app.py`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/app.py).
+* Uses `st.number_input` to get input.
+* Computes square, cube, fifth power → displays with `st.write`.
+
+### Pytest Tests
+
+* Implemented in [`pytest_test.py`](https://github.com/PrakashD2003/Continuous-Integration-Study/blob/main/pytest_test.py).
+* Tests assert values for known inputs.
+* Uses `pytest.raises` for invalid inputs.
+
+---
+
+## 🔮 Future Improvements
+
+* Add more operations (e.g. square roots, factorials).
+* Integrate code quality checks (flake8, black).
+* Extend to Continuous Deployment (CD) by hosting the Streamlit app.
+* Run CI matrix builds across Python versions/OS.
+* Add coverage reporting (`coverage.py`).
+
+---
+
+## 🙌 Closing Notes
+
+This project is a **concise example of setting up CI** for a Python application.
+It highlights the synergy between **Streamlit (UI)**, **pytest (testing)**, and **GitHub Actions (automation)**.
+
+👉 [View the Repository on GitHub](https://github.com/PrakashD2003/Continuous-Integration-Study)
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
